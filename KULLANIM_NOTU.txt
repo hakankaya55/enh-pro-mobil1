@@ -1,0 +1,77 @@
+ENH PRO – HAKAN KAYA / 477 MCM güncellemesi / 12.10.2026
+
+1. ZIP dosyasının tamamını bir klasöre çıkarın.
+2. Python 3.13 ve Pillow kuruluysa ENH_PRO_HAKAN_KAYA_GORSELLI.pyw dosyasını açın.
+   Pillow kurulumu: python -m pip install pillow
+3. Maksimum Açıklık Hesaplama bölümünde İletken Adı: 477 MCM seçin.
+4. Hat tipi: Tek devre, Çift devre veya Dört devre.
+5. Bölge 1–4, proje a_ort ve iki direk tipini seçip Hesapla'ya basın.
+6. Windows EXE oluşturmak için EXE_OLUSTUR.bat dosyasını çalıştırın.
+   EXE, dist klasöründe oluşur. Bu paket hazır EXE içermez.
+
+477_data.json ve ENH_PRO_ANA_MENU.png, .pyw ile aynı klasörde kalmalıdır.
+Mevcut 3/0 AWG verileri ve Direk Boyu Seçim Asistanı korunmuştur.
+477 MCM direk boyu asistanı eklenmemiştir. Beton direk bulunmaz; 5. bölge seçilemez.
+477 MCM tek/çift karma devre için kaynak tablo bulunmadığından seçenek eklenmemiştir.
+
+477 MCM TABLO KURALI
+- İlgili direk çiftinin proje a_ort değerine eşit veya daha büyük tablosu alınır.
+- Tam eşleşme varsa o tablo kullanılır.
+- x işareti sayısal değer değildir. Kaynak notuna göre daha büyük a_ort tablolarındaki
+  aynı kesişim aranır. Sonuçta gerçekten kullanılan tablo ve kaynak sayfası gösterilir.
+- Boş / verilmemiş kesişimde veya üst sınır dışında tahmini sonuç üretilmez.
+- T1/T2/T3 ve D/N tipleri tek devre adaptasyonuna; TB/DA/DB/N/NA/NB tipleri
+  çift devreye; 4HT/4HN tipleri dört devreye aittir.
+- D4/N4 kaynakta ortak başlıkla verilen sütundur. 34° ve 90° KD seçenekleri
+  ayrı direk seçenekleri olarak gösterilir. İki açı seçeneğinin kesişimi kaynakta yoksa
+  program değer üretmez. Çift devrede DA kısa ve uzun konsol ayrı seçeneklerdir.
+
+KAYNAK NOTLARI
+Atilla Yunusoğlu, ENH 2014 Cilt 2, 477 MCM galvaniz demir bölümleri.
+Tek devre adaptasyonu (s.572) onaylı tip proje değildir; projeye özel adaptasyon
+hesabı, ekleri ve onay makamına sunumu kaynakta istenir.
+İzolatör salınımı ve açısal kayma kontrolleri ayrıca yapılmalıdır (s.583 ve 605).
+Sonuç bir tablo kesişimidir; diğer proje kontrolleri bu güncellemenin kapsamına girmez.
+
+DOĞRULAMA BEKLEYEN KAYNAK HÜCRELERİ
+1. Tek devre, 3. bölge, a_ort 400: T1–T2 kaynakta 733 m (s.590).
+2. Çift devre, 2. bölge, a_ort 350: NA53°–NB79° kaynakta 364 m (s.559).
+Bu sıra dışı değerler ham veride korunmuş, hesaplama sonucu üretmesi engellenmiştir.
+Tahmini düzeltme yapılmamıştır.
+
+KONTROLLER
+- 3/0 AWG veri grupları önceki dosyayla karşılaştırılmış ve aynı bulunmuştur.
+- 3/0 AWG 2. bölge / 300 / BER–BES: 330 m; 3. bölge: 282 m.
+- 477 MCM 1. bölge / 300 / T1–T2: 484 m.
+- 477 MCM 1. bölge / 301 / T1–T2: 350 tablosu, 478 m.
+- 477 MCM 1. bölge / 300 / D1–D1: x üzerinden 500 tablosu, 490 m.
+- 3.222 kesişimde Python / JavaScript sonuç eşitliği kontrol edilmiştir.
+- Windows hesaplama denetleyicisi, mobil seçim ve hesaplama akışı test edilmiştir.
+- Bu ortamda Windows EXE çalıştırma ve gerçek tarayıcı görsel testi yapılamamıştır.
+
+MOBİL GÜNCELLEME
+Bu ZIP, GitHub Pages sitesine kendiliğinden yüklenmez.
+Mevcut enh-pro-mobil deposunda index.html, data477.js, sw.js ve diğer paket dosyalarını
+aynı kök klasöre yükleyin. data.js eski 3/0 AWG verilerini korur.
+data477.js yeni dosyadır; mutlaka yüklenmelidir.
+Mobil ana menüden Maksimum Açıklık Hesaplama > İletken Adı: 477 MCM seçin.
+Yeni önbellek sürümü eski ENH PRO önbelleğini kaldırır. Güncelleme sonrası sayfayı
+internet bağlantısıyla yeniden açın.
+
+
+EN FAZLA AÇIKLIK SEÇENEĞİ (12.10.2026)
+Maksimum Açıklık Hesaplama bölümünde Hesaplama Seçeneği: En Fazla Açıklık Sağlayan Direkler seçin.
+İletkeni, hat tipini, buz yükü bölgesini ve proje a_ort değerini girin.
+EN FAZLA AÇIKLIĞI BUL düğmesine basın. Direkleri elle seçmeniz gerekmez.
+Program mevcut hesaplama kurallarıyla direk çiftlerini karşılaştırır; en yüksek
+sayısal açıklığı, bu değeri sağlayan bütün çiftleri ve en yüksek 10 sonucu gösterir.
+Her çift için gerçekten kullanılan a_ort tablosu yazılır. Aynı tip iki direk de dahildir.
+Tek/Çift devrede satır ve sütun direkleri kendi gruplarından alınır.
+Eksik, boş veya kaynak doğrulaması bekleyen hücreler aday listesine alınmaz.
+En büyük değer, kayıtlı ve sayısal sonuç alınabilen tablolar içindeki en büyük değerdir;
+eksik hücrelerden daha büyük bir sonuç olup olmadığı tahmin edilmez.
+Normal hesaba dönmek için Seçilen Direkler Arası Açıklık seçeneğini kullanın.
+Örnek: 3/0 AWG, tek devre, 3. bölge, a_ort 300: P0–P0, 421 m.
+Örnek: 477 MCM, tek devre, 3. bölge, a_ort 300: T3–T3, 724 m.
+Windows/mobil sıralama sonuçları 252 seçimde karşılaştırılmıştır; eşit en yüksek
+sonuçlar, üst tablo geçişleri, veri olmayan girişler ve kaynak uyarıları kontrol edilmiştir.

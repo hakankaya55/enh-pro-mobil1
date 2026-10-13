@@ -1,0 +1,76 @@
+ENH PRO – HAKAN KAYA
+TEK DEVRE FOTOĞRAF ASİSTANI · İLK DENEME PAKETİ
+
+Bu paket güncel Windows ve mobil uygulamanızın ayrı deneme kopyasıdır.
+Mevcut açıklık hesaplamaları ve elle direk boyu seçimi korunmuştur.
+Fotoğraf tanıma kapsamı: BER, BES, BET-BEY, K, L, LA, PA, R, P.
+Çift devre fotoğraf tanıma eklenmemiştir.
+
+NE YAPAR?
+1. Üst travers şekli, düzeni ve göreli açıklığı üzerinden dokuz etiketli
+   arazi fotoğrafıyla karşılaştırarak direk tipi adayı üretir.
+2. Aday tipe ait teknik şema ve hedef fotoğraf üzerinden gövde çaprazlarını
+   inceler. Gövde tam/net değilse veya sayım belirsizse boy kodu üretmez.
+3. Yalnızca mevcut çapraz–boy kodu tablosundaki TAM eşleşmeyi kullanır.
+   En yakın sayıya yuvarlama yapmaz. BET ve BEY ortak sınıftır.
+4. Sonucu kontrol ettikten sonra mevcut asistan alanlarına aktarabilirsiniz.
+
+ÖNEMLİ DURUM
+Fotoğraf arayüzleri ve analiz bağlantı kodu hazırlanmıştır. Canlı otomatik
+analiz bu paket hazırlanırken çalıştırılmamıştır: API anahtarı yoktur.
+Mobil analiz sunucusu yayınlanmamıştır; mevcut GitHub Pages siteniz değişmedi.
+Bu sürüm eğitilmiş veya arazi doğruluğu ölçülmüş bir sınıflandırıcı değildir.
+Etiketli görüntülerle görsel karşılaştırma yapar; sonuç aday olarak gösterilir.
+Boy sonucu -8, -6, ... +6 TABLO KODUDUR; metre cinsinden toplam direk boyu değildir.
+Fotoğraflar, ANALİZ ET düğmesine basılınca OpenAI hizmetine gönderilir.
+API hesabı, internet ve kullanım bakiyesi gerekir; ChatGPT aboneliği yerine
+ayrı API bağlantısı kullanılır. Ücretli canlı çağrı bu çalışma sırasında yapılmadı.
+
+WINDOWS
+Windows klasörünü tamamen çıkarın. Python 3.13 ile çalışır.
+İlk kurulum: python -m pip install pillow opencv-python
+PROGRAMI_AC.bat ile mevcut uygulamayı açın.
+Direk Boyu Seçim Asistanı → FOTOĞRAFTAN TİP VE BOY · TEK DEVRE.
+Fotoğraf seçin veya kameradan çekin. API anahtarını analiz penceresindeki
+maskeli alana kendi bilgisayarınızda girin; sohbete göndermeyin.
+Anahtar pencerede bellekte tutulur; dosyaya yazılmaz.
+Model alanı varsayılan gpt-6-astra; hesabınızda erişilen görsel analiz modelini
+kullanabilirsiniz. ANALİZ ET ile karşılaştırmayı başlatın.
+EXE_OLUSTUR.bat Windows'ta EXE oluşturur. Bu pakette hazır EXE yoktur.
+
+MOBİL
+mobile klasöründeki dosyalar mobil web uygulamasının deneme kopyasıdır.
+Direk Boyu Seçim Asistanı altında FOTOĞRAF ÇEK ve FOTOĞRAF SEÇ bulunur.
+Etiketli referanslar hizmet bağlantısı olmadan da incelenebilir.
+Otomatik analiz için önce service klasöründeki hizmet HTTPS ile yayınlanmalıdır.
+GitHub Pages Python hizmetini çalıştırmaz; yalnızca mobile dosyalarını barındırır.
+Analiz hizmeti adresi ve bağlantı parolası mobilde "Analiz bağlantısı" alanına girilir.
+OpenAI API anahtarı mobil HTML/JavaScript içine ASLA konulmaz.
+Telefon kamera düğmesi cihazın kamera/galeri seçicisini açar; davranışı cihaza bağlıdır.
+
+ANALİZ HİZMETİ – KURULUM
+service klasöründe: python -m pip install -r requirements.txt
+Sunucu ortam değişkenleri:
+OPENAI_API_KEY = kendi API anahtarınız (yalnızca sunucuda)
+ENH_ACCESS_TOKEN = uzun, rastgele kişisel bağlantı parolanız
+ENH_ALLOWED_ORIGIN = https://hakankaya55.github.io
+ENH_VISION_MODEL = gpt-6-astra (isteğe bağlı)
+Linux HTTPS barındırma başlangıç komutu:
+gunicorn --bind 0.0.0.0:$PORT --timeout 330 server:application
+PORT barındırma hizmetinin verdiği porttur. HTTPS ters vekil gerekir.
+Yerel bilgisayar denemesi: python server.py (127.0.0.1:8765)
+Telefonun HTTPS sayfası yerel HTTP servisine bağlanamaz; uzaktan HTTPS gerekir.
+Anahtarı veya bağlantı parolasını GitHub deposuna yüklemeyin.
+
+DENEME
+Tip için traversler ve tepe kolu net görünsün. Boy için zeminden tepeye bütün
+gövde görünmeli. Mümkünse aynı direğin önden ve yandan fotoğraflarını çekin.
+Bilinen direklerde gerçek tip ve boy koduyla sonuçları karşılaştırın.
+Belirsiz fotoğrafta kesin sonuç yerine "belirlenemedi" verilmesi beklenir.
+
+DOĞRULAMA
+Python dosyalarının derlemesi, referansların açılması, tablo tam eşleşmesi,
+eksik gövdede boy vermeme, belirsiz tip, bağlantı yetkilendirme ve mobil
+JavaScript sözdizimi kontrol edildi. Model yanıtları kontrollü örneklerle test edildi.
+Bu ortamda tarayıcı ve Windows kamera çalıştırılamadığından arayüz/kamera
+uçtan uca testi, canlı API testi ve saha doğruluğu testi henüz yapılmadı.
